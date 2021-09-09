@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useReducer } from "react";
-import { eventsReducer } from "../reducers/eventsReducer";
+import { eventsReducer } from "../reducers/events";
 import { EventForm } from "./EventForm";
 import { Events } from "./Events";
 

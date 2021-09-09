@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { useCallback, useState } from "react";
+import { CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions/events";
 
 export const EventForm = ({ events, dispatch }) => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ export const EventForm = ({ events, dispatch }) => {
       e.preventDefault();
       // dipatch(action)
       dispatch({
-        type: "CREATE_EVENT",
+        type: CREATE_EVENT,
         title: title,
         body: body,
       });
@@ -26,7 +27,7 @@ export const EventForm = ({ events, dispatch }) => {
       if (!confirm("全てのイベントを本当に削除しても良いですか？")) return;
 
       dispatch({
-        type: "DELETE_ALL_EVENTS",
+        type: DELETE_ALL_EVENTS,
       });
     },
     [dispatch]
