@@ -1,23 +1,27 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useReducer, useState } from "react";
+import { useCallback, useReducer, useState } from "react";
 import { eventsReducer } from "../reducers";
+import { Event } from "./Event";
 
 const App = () => {
-  const [state, dispatch] = useReducer(eventsReducer, []);
+  const [events, dispatch] = useReducer(eventsReducer, []);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const addEvent = (e) => {
-    e.preventDefault();
-    // dipatch(action)
-    dispatch({
-      type: "CREATE_EVENT",
-      title: title,
-      body: body,
-    });
-    setTitle("");
-    setBody("");
-  };
+  const handleClickAddEvent = useCallback(
+    (e) => {
+      e.preventDefault();
+      // dipatch(action)
+      dispatch({
+        type: "CREATE_EVENT",
+        title: title,
+        body: body,
+      });
+      setTitle("");
+      setBody("");
+    },
+    [title, body]
+  );
 
   return (
     <>
@@ -42,7 +46,7 @@ const App = () => {
               onChange={(e) => setBody(e.target.value)}
             />
           </div>
-          <button className="btn btn-primary" onClick={addEvent}>
+          <button className="btn btn-primary" onClick={handleClickAddEvent}>
             イベントを作成する
           </button>
           <button className="btn btn-danger">全てのイベントを削除する</button>
@@ -57,7 +61,11 @@ const App = () => {
               <th></th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {events.map((event, index) => (
+              <Event key={index} event={event} dispatch={dispatch} />
+            ))}
+          </tbody>
         </table>
       </div>
     </>
