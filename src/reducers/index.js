@@ -4,7 +4,7 @@
 //   body: "ボディー",
 // };
 
-export const events = (state = [], action) => {
+export const eventsReducer = (state = [], action) => {
   switch (action.type) {
     case "CREATE_EVENT":
       const event = { title: action.title, body: action.body };
