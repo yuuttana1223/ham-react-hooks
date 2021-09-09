@@ -14,7 +14,7 @@ export const eventsReducer = (events = [], action) => {
       return [...events, { id: id, ...event }];
     case "DELETE_EVENT":
       return events.filter((event) => event.id !== action.id);
-    case "DELETE_ALL_EVENT":
+    case "DELETE_ALL_EVENTS":
       return [];
     default:
       return events;

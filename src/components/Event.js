@@ -1,7 +1,10 @@
+/* eslint-disable no-restricted-globals */
 import { memo, useCallback } from "react";
 
 export const Event = memo(({ event: { id, title, body }, dispatch }) => {
   const handleClickDeleteEvent = useCallback(() => {
+    if (!confirm(`イベント(id=${id})を本当に削除しても良いですか？`)) return;
+
     dispatch({
       type: "DELETE_EVENT",
       id: id,

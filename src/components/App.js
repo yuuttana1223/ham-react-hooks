@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useCallback, useReducer, useState } from "react";
 import { eventsReducer } from "../reducers";
@@ -23,6 +24,18 @@ const App = () => {
     [title, body]
   );
 
+  const handleClickDeleteAllEvents = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!confirm("全てのイベントを本当に削除しても良いですか？")) return;
+
+      dispatch({
+        type: "DELETE_ALL_EVENTS",
+      });
+    },
+    [dispatch]
+  );
+
   return (
     <>
       <div className="container-fluid">
@@ -46,10 +59,20 @@ const App = () => {
               onChange={(e) => setBody(e.target.value)}
             />
           </div>
-          <button className="btn btn-primary" onClick={handleClickAddEvent}>
+          <button
+            className="btn btn-primary"
+            onClick={handleClickAddEvent}
+            disabled={title.trim() === "" || body.trim() === ""}
+          >
             イベントを作成する
           </button>
-          <button className="btn btn-danger">全てのイベントを削除する</button>
+          <button
+            className="btn btn-danger"
+            onClick={handleClickDeleteAllEvents}
+            disabled={events.length === 0}
+          >
+            全てのイベントを削除する
+          </button>
         </form>
         <h4>イベント一覧</h4>
         <table className="table table-hover">
