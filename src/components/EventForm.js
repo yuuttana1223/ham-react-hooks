@@ -1,18 +1,23 @@
 /* eslint-disable no-restricted-globals */
 import { useCallback, useContext, useState } from "react";
-import { ADD_OPERATION_LOG, CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions";
+import {
+  ADD_OPERATION_LOG,
+  CREATE_EVENT,
+  DELETE_ALL_EVENTS,
+  DELETE_ALL_OPERATION_LOGS,
+} from "../actions";
 import { AppContext } from "../contexts/AppContext";
 import { timeCurrentIso8601 } from "../utils";
 
 export const EventForm = () => {
   const {
-    state: { events },
+    state: { events, operationLogs },
     dispatch,
   } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const handleClickAddEvent = useCallback(
+  const addEvent = useCallback(
     (e) => {
       e.preventDefault();
       // dipatch(action)
@@ -34,7 +39,7 @@ export const EventForm = () => {
     [title, body, dispatch]
   );
 
-  const handleClickDeleteAllEvents = useCallback(
+  const deleteAllEvents = useCallback(
     (e) => {
       e.preventDefault();
       if (!confirm("全てのイベントを本当に削除しても良いですか？")) return;
@@ -51,6 +56,19 @@ export const EventForm = () => {
     },
     [dispatch]
   );
+
+  const deleteAllOperationLogs = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!confirm("全ての操作ログを本当に削除しても良いですか？")) return;
+
+      dispatch({
+        type: DELETE_ALL_OPERATION_LOGS,
+      });
+    },
+    [dispatch]
+  );
+
   return (
     <>
       <form>
@@ -74,17 +92,24 @@ export const EventForm = () => {
         </div>
         <button
           className="btn btn-primary"
-          onClick={handleClickAddEvent}
+          onClick={addEvent}
           disabled={title.trim() === "" || body.trim() === ""}
         >
           イベントを作成する
         </button>
         <button
           className="btn btn-danger"
-          onClick={handleClickDeleteAllEvents}
+          onClick={deleteAllEvents}
           disabled={events.length === 0}
         >
           全てのイベントを削除する
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={deleteAllOperationLogs}
+          disabled={operationLogs.length === 0}
+        >
+          全ての操作ログを削除する
         </button>
       </form>
     </>

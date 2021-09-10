@@ -6,7 +6,7 @@ import { AppContext } from "../contexts/AppContext";
 export const Event = memo(({ event: { id, title, body } }) => {
   const { dispatch } = useContext(AppContext);
 
-  const handleClickDeleteEvent = useCallback(() => {
+  const deleteEvent = useCallback(() => {
     if (!confirm(`イベント(id=${id})を本当に削除しても良いですか？`)) return;
     dispatch({
       type: DELETE_EVENT,
@@ -20,11 +20,7 @@ export const Event = memo(({ event: { id, title, body } }) => {
       <td>{title}</td>
       <td>{body}</td>
       <td>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={handleClickDeleteEvent}
-        >
+        <button type="button" className="btn btn-danger" onClick={deleteEvent}>
           削除
         </button>
       </td>
