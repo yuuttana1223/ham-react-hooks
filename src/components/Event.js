@@ -1,7 +1,8 @@
 /* eslint-disable no-restricted-globals */
 import { memo, useCallback, useContext } from "react";
-import { DELETE_EVENT } from "../actions";
+import { ADD_OPERATION_LOG, DELETE_EVENT } from "../actions";
 import { AppContext } from "../contexts/AppContext";
+import { timeCurrentIso8601 } from "../utils";
 
 export const Event = memo(({ event: { id, title, body } }) => {
   const { dispatch } = useContext(AppContext);
@@ -11,6 +12,12 @@ export const Event = memo(({ event: { id, title, body } }) => {
     dispatch({
       type: DELETE_EVENT,
       id: id,
+    });
+
+    dispatch({
+      type: ADD_OPERATION_LOG,
+      description: `イベント(id=${id})を削除しました。`,
+      operatedAt: timeCurrentIso8601(),
     });
   }, [id, dispatch]);
 
