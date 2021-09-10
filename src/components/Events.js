@@ -3,7 +3,9 @@ import { AppContext } from "../contexts/AppContext";
 import { Event } from "./Event";
 
 export const Events = () => {
-  const { events } = useContext(AppContext);
+  const {
+    state: { events },
+  } = useContext(AppContext);
   return (
     <>
       <table className="table table-hover">

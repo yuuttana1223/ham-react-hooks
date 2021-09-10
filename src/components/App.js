@@ -1,15 +1,18 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useReducer } from "react";
 import { AppContext } from "../contexts/AppContext";
-import { eventsReducer } from "../reducers/events";
+import { rootReducer } from "../reducers/rootReducer";
 import { EventForm } from "./EventForm";
 import { Events } from "./Events";
 
-const App = () => {
-  const [events, dispatch] = useReducer(eventsReducer, []);
+export const App = () => {
+  const [state, dispatch] = useReducer(rootReducer, {
+    // eventsはevents.jsの関数(const events)の名前に依存する
+    events: [],
+  });
 
   return (
-    <AppContext.Provider value={{ events, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch }}>
       <div className="container-fluid">
         <h4>イベント作成フォーム</h4>
         <EventForm />
@@ -19,5 +22,3 @@ const App = () => {
     </AppContext.Provider>
   );
 };
-
-export default App;

@@ -4,7 +4,10 @@ import { CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions/events";
 import { AppContext } from "../contexts/AppContext";
 
 export const EventForm = () => {
-  const { events, dispatch } = useContext(AppContext);
+  const {
+    state: { events },
+    dispatch,
+  } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
