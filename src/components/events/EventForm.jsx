@@ -1,15 +1,15 @@
 /* eslint-disable no-restricted-globals */
-import { useCallback, useContext, useState } from "react";
+import { memo, useCallback, useContext, useState } from "react";
 import {
   ADD_OPERATION_LOG,
   CREATE_EVENT,
   DELETE_ALL_EVENTS,
   DELETE_ALL_OPERATION_LOGS,
-} from "../actions";
-import { AppContext } from "../contexts/AppContext";
-import { timeCurrentIso8601 } from "../utils";
+} from "../../actions";
+import { AppContext } from "../../contexts/AppContext";
+import { timeCurrentIso8601 } from "../../utils";
 
-export const EventForm = () => {
+export const EventForm = memo(() => {
   const {
     state: { events, operationLogs },
     dispatch,
@@ -71,6 +71,7 @@ export const EventForm = () => {
 
   return (
     <>
+      <h4>イベント作成フォーム</h4>
       <form>
         <div className="form-group">
           <label htmlFor="formEventTitle">タイトル</label>
@@ -114,4 +115,4 @@ export const EventForm = () => {
       </form>
     </>
   );
-};
+});

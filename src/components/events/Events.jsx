@@ -1,13 +1,14 @@
-import { useContext } from "react";
-import { AppContext } from "../contexts/AppContext";
+import { memo, useContext } from "react";
+import { AppContext } from "../../contexts/AppContext";
 import { Event } from "./Event";
 
-export const Events = () => {
+export const Events = memo(() => {
   const {
     state: { events },
   } = useContext(AppContext);
   return (
     <>
+      <h4>イベント一覧</h4>
       <table className="table table-hover">
         <thead>
           <tr>
@@ -25,4 +26,4 @@ export const Events = () => {
       </table>
     </>
   );
-};
+});

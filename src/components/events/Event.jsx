@@ -1,8 +1,8 @@
 /* eslint-disable no-restricted-globals */
 import { memo, useCallback, useContext } from "react";
-import { ADD_OPERATION_LOG, DELETE_EVENT } from "../actions";
-import { AppContext } from "../contexts/AppContext";
-import { timeCurrentIso8601 } from "../utils";
+import { ADD_OPERATION_LOG, DELETE_EVENT } from "../../actions";
+import { AppContext } from "../../contexts/AppContext";
+import { timeCurrentIso8601 } from "../../utils";
 
 export const Event = memo(({ event: { id, title, body } }) => {
   const { dispatch } = useContext(AppContext);
