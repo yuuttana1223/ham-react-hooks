@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { useCallback, useContext, useState } from "react";
-import { CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions/events";
+import { CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions";
 import { AppContext } from "../contexts/AppContext";
 
 export const EventForm = () => {

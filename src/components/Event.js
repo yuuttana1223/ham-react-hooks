@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { memo, useCallback, useContext } from "react";
-import { DELETE_EVENT } from "../actions/events";
+import { DELETE_EVENT } from "../actions";
 import { AppContext } from "../contexts/AppContext";
 
 export const Event = memo(({ event: { id, title, body } }) => {

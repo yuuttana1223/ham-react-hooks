@@ -1,8 +1,4 @@
-import {
-  CREATE_EVENT,
-  DELETE_ALL_EVENTS,
-  DELETE_EVENT,
-} from "../actions/events";
+import { CREATE_EVENT, DELETE_ALL_EVENTS, DELETE_EVENT } from "../actions";
 
 // action = {
 //   type: "CREATE_EVENT",
@@ -15,6 +11,7 @@ export const events = (state = [], action) => {
     case CREATE_EVENT:
       const event = { title: action.title, body: action.body };
       const length = state.length;
+      // まだ要素がなければ、idが1でそうでなければ、最後のidの次のid
       const id = length === 0 ? 1 : state[length - 1].id + 1;
       return [...state, { id: id, ...event }];
     case DELETE_EVENT:
