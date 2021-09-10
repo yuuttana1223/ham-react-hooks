@@ -1,7 +1,8 @@
 /* eslint-disable no-restricted-globals */
 import { useCallback, useContext, useState } from "react";
-import { CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions";
+import { ADD_OPERATION_LOG, CREATE_EVENT, DELETE_ALL_EVENTS } from "../actions";
 import { AppContext } from "../contexts/AppContext";
+import { timeCurrentIso8601 } from "../utils";
 
 export const EventForm = () => {
   const {
@@ -20,6 +21,13 @@ export const EventForm = () => {
         title: title,
         body: body,
       });
+
+      dispatch({
+        type: ADD_OPERATION_LOG,
+        description: "イベントを作成しました。",
+        operatedAt: timeCurrentIso8601(),
+      });
+
       setTitle("");
       setBody("");
     },
@@ -33,6 +41,12 @@ export const EventForm = () => {
 
       dispatch({
         type: DELETE_ALL_EVENTS,
+      });
+
+      dispatch({
+        type: ADD_OPERATION_LOG,
+        description: "すべてのイベントを削除しました。",
+        operatedAt: timeCurrentIso8601(),
       });
     },
     [dispatch]

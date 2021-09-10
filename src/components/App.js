@@ -9,7 +9,7 @@ export const App = () => {
   const [state, dispatch] = useReducer(rootReducer, {
     // eventsはevents.jsの関数(const events)の名前に依存する
     events: [],
-    operetionLogs: [],
+    operationLogs: [],
   });
 
   return (
