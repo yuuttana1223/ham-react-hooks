@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { events } from "./eventsReducer";
-import { operationLogs } from "./operationLogsReducer";
+import { eventsReducer } from "./eventsReducer";
+import { operationLogsReducer } from "./operationLogsReducer";
 
 export const rootReducer = combineReducers({
-  events,
-  operationLogs,
+  events: eventsReducer,
+  operationLogs: operationLogsReducer,
 });
