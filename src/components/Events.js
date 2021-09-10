@@ -2,11 +2,10 @@ import { useContext } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { Event } from "./Event";
 
-export const Events = ({ events, dispatch }) => {
-  const value = useContext(AppContext);
+export const Events = () => {
+  const { events } = useContext(AppContext);
   return (
     <>
-      <div>{value}</div>
       <table className="table table-hover">
         <thead>
           <tr>
@@ -18,7 +17,7 @@ export const Events = ({ events, dispatch }) => {
         </thead>
         <tbody>
           {events.map((event, index) => (
-            <Event key={index} event={event} dispatch={dispatch} />
+            <Event key={index} event={event} />
           ))}
         </tbody>
       </table>

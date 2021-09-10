@@ -1,8 +1,11 @@
 /* eslint-disable no-restricted-globals */
-import { memo, useCallback } from "react";
+import { memo, useCallback, useContext } from "react";
 import { DELETE_EVENT } from "../actions/events";
+import { AppContext } from "../contexts/AppContext";
 
-export const Event = memo(({ event: { id, title, body }, dispatch }) => {
+export const Event = memo(({ event: { id, title, body } }) => {
+  const { dispatch } = useContext(AppContext);
+
   const handleClickDeleteEvent = useCallback(() => {
     if (!confirm(`イベント(id=${id})を本当に削除しても良いですか？`)) return;
     dispatch({
